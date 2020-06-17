@@ -1,22 +1,27 @@
 <template>
-  <div id="VideoList">
-    <div v-for="content in contents" :key="content.id.viedoId">
-        <img :src="content.snippet.thumbnails.high.url"/>
-        <div>
-        {{content.snippet.title}}
-        </div>
+  <ul class="list-group">
+    <li class="list-group-item" v-for="video in videos" :key="video.id.viedoId">
+          <VideoItem :video="video" @imageClicked="imageClicked"/>
         <!-- <iframe width="560" height="315" :src="`https://www.youtube.com/embed/${content.id.videoId}`" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe> -->
-    </div>
-
-  </div>
+    </li>
+  </ul>
 </template>
 
 <script>
+import VideoItem from './VideoItem';
 export default {
     name: "VideoList",
+    components: {
+      VideoItem
+    },
     props: {
-        contents: Array
+        videos: Array
+    },
+    methods:{
+      imageClicked(video){
+        this.$emit('imageClicked', video);
+      }
     }
 }
 </script>

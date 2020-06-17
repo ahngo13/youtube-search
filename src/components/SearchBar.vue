@@ -1,7 +1,6 @@
 <template>
   <div>
-      <h1>Youtube Search</h1>
-      <input v-model="keyword" @keypress.enter="inputEntered" type="text">
+      <input class="form-control" v-model="userInput" @keypress.enter="onInput" type="text">
     <!--   <ul>
           <li v-for="content in contents" :key="content.id.viedoId">
               {{content.snippet.title}}
@@ -14,13 +13,13 @@ export default {
     name: "SearchBar",
     data(){
         return{
-            keyword: ""
+            userInput: ""
         }
     },
     methods:{
-        inputEntered(){
-            // this.$emit('dogButtonClicked') 전파될 변수명
-            this.$emit('inputEntered', this.keyword);
+        onInput(){
+            // App.vue에 $emit을 통해 userInput 전달하는 함수
+            this.$emit('onInput', this.userInput);
         }
     }
 }
